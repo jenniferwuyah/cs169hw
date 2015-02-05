@@ -2,4 +2,4 @@
 
 Part 1 -- Sinatra
 
-deployed on Heroku: jwu169sinatra-hw.herokuapp.com
+deployed on Heroku: jwu169-sinatra.herokuapp.com
