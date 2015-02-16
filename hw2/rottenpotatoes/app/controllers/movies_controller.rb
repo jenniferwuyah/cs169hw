@@ -12,6 +12,7 @@ class MoviesController < ApplicationController
         @selected_ratings = params[:ratings]
     elsif session[:ratings].present?
     	@selected_ratings = session[:ratings]
+   	redirect = true
     else
 	@selected_ratings = Hash[@all_ratings.map {|x| [x, 1]}]
     end
@@ -21,8 +22,14 @@ class MoviesController < ApplicationController
         @sort_by = params[:sort]
     elsif session[:sort].present?
         @sort_by = session[:sort]
+	redirect = true
     end
     session[:sort] = @sort_by if @sort_by.present?
+    
+    if redirect
+        flash.keep
+        redirect_to movies_path :sort => @sort_by, :ratings => @selected_ratings
+    end
 
     @movies = Movie.where(:rating => @selected_ratings.keys)
     @movies = @movies.order(@sort_by) if @sort_by.present?
