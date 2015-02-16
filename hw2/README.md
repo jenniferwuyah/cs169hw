@@ -36,7 +36,10 @@ retention process.
 0. Create a brand-new Rails app called `rottenpotatoes` (you can choose a
 different name, but the provided skeleton code won't work
 out-of-the-box).  You should now have a `rottenpotatoes` directory,
-which is the "app root directory" in Rails parlance.
+which is the "app root directory" in Rails parlance.  **Hint:** To
+create a brand-new Rails app, you don't need to create all its files
+from scratch.  "Use the Google" to figure out how Rails itself can
+create the "skeleton" of a new app for you.
 
 0. Put that directory immediately under Git version control, and add all
 the files in it.  Commit.
@@ -50,10 +53,13 @@ their counterparts from the provided
 * app/controllers/movies_controller.rb
 * app/views/layouts/application.html.haml
 * app/views/movies/*.html.haml
-* app/modes/movie.rb
-* config.ru
+* app/models/movie.rb
+* config.ru 
 * db/seeds.rb
-* db/migrate/*
+
+
+
+0. When you generate the Rails scaffolding, you are given a default global HTML layout in `app/views/layouts/application.html.erb`.  However, we give a pre-written HAML template instead at `app/views/layouts/application.html.haml`.  This means you should remove `app/views/layouts/application.html.erb` so that Rails uses the HAML template instead.
 
 Commit the new versions of these files.
 
@@ -89,24 +95,40 @@ for the movies model.
 don't mean that the database has no movies in it, though that also
 happens to be true: we mean there is no database at all!)  In other
 words, we have not run the initial migration to create the schema.
-Run `rails generate migration CreateMovies` to create an empty migration file.
 
-What command line should we use to cause Rails to generate a migration
-file for us that will create a `movies` database table whose attributes
-are title (string), release date (datetim
+* What command should we use to cause Rails to generate a migration
+file for us that will add the columns
+title (string), release date (datetime), rating (string), and
+description (text) to a table called `movies`?
 
-> According to `db/migrate/0000
+> `rails generate migration AddFieldsToMovies title:string release_date:datetime rating:string description:text`
 
-Before running `rake db:migrate`
+Take a look at the migration file that was created.  The `change` method
+defines what happens when the migration is applied.
 
-0. At this point you should be able to run the app locally with `rails
+* Why will this migration **fail** if applied right now, and how should
+you fix it?  (Hint: what
+assumption does the `change` code appear to make about the database schema?)
+
+> The `change` method assumes the `movies` table already exists, and adds
+> columns to it.  One fix is to add `create_table :movies` (or
+> `create_table "movies"`) at the beginning of the `change` method.
+
+Apply the fix and then run the migration (hint: `rake` is involved).
+
+At this point you should be able to run the app locally with `rails
 server` and ensure you can visit 
 `localhost:3000` in a browser.
 
 0. Deploy the app to Heroku (review the procedure in the ESaaS Appendix if
-necessary). 
+necessary). Here's a brief overview of the workflow:
+  - Start by creating a new Heorku app and configuring your rottenpotatoes git repository to have a Heroku remote
+  - Heroku is going to require that you have a database ready and waiting when you push your code, else the deploy will fail.  A Heroku PostgreSQL database can be created for your app by running `heroku addons:add heroku-postgresql`.
+  - Go ahead and deploy your app with the proper git push command
+  - At this point, visiting the '/movies' route will still fail.  This is because you have a DB stood up, but it does not have the most up-to-date schema instantiated for your app (in fact, there is no schema at all since we _just_ made the DB).  We can run all of our DB migrations on our Heroku deployed app by running `heroku run rake db:migrate`.  This is the same as a local `rake db:migrate` except that it runs it on your cloud-deployed Heroku app.
+  - Optionally, you can run `heroku run rake db:seed` to populate some dummy movie entries
 
-0. Verify you can visit the app as deployed on Heroku.  This is your
+0. Verify you can visit the app as deployed on Heroku. You should be able to browse to the '/movies' route and click around without issues.  This is your
 starting point.  Get to this point before continuing, or you'll be in a
 world of pain.  **A world of pain.**
 
