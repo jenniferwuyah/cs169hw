@@ -1,7 +1,7 @@
 BDD & Cucumber
 ===========================================
 
-#. Part 0: Setting Up Cucumber
+# Part 0: Setting Up Cucumber
 
 First, this homework requires that you have successfully completed Homework 2, as we will be building on top of that here.  If you had issues completing HW2, see the HW3 announcement on Piazza for advice on what to do moving forward.
 
@@ -49,29 +49,29 @@ SUCCESS is when all Background steps for the scenarios in `filter_movie_list.fea
 **Note**: If you have access to the SaaS textbook and have never used Cucumber before we strongly recommend that you work step by step through the code in chapter 7 of the Engineering Software as a Service textbook.  We also have a series of free screencasts that walk through the code in that chapter, which you can view even if you don't have the textbook
 
 
-#. Part 2: Happy paths for filtering movies
+# Part 2: Happy paths for filtering movies
 
 0. Complete the scenario `restrict to movies with 'PG' or 'R' ratings` in `filter_movie_list.feature`. You can use existing step definitions in `web_steps.rb` to check and uncheck the appropriate boxes, submit the form, and check whether the correct movies appear (and just as importantly, movies with unselected ratings do not appear).
 
 0. Since it's tedious to repeat steps such as When I check the 'PG' checkbox, And I check the 'R' checkbox, etc., create a step definition to match a step such as:
 `When I check the following ratings: G, PG, R`
 
-This single step definition should only check the specified boxes, and leave the other boxes as they were.
+   This single step definition should only check the specified boxes, and leave the other boxes as they were.
 
-**HINT**: this step definition can reuse existing steps in web_steps.rb, as shown in the example in Section 7.9 of the ESaaS textbook.
+   **HINT**: this step definition can reuse existing steps in web_steps.rb, as shown in the example in Section 7.9 of the ESaaS textbook.
 
 0. For the scenario `all ratings selected`, it would be tedious to use `And I should` see to name every single movie. That would detract from the goal of BDD to convey the behavioral intent of the user story. To fix this, create step definitions that will match steps of the form: 
 `Then I should see all the movies in movie_steps.rb. `
 
-**HINT**: Consider counting the number of rows in the table to implement these steps. If you have computed rows as the number of table rows, you can use the assertion 
-`assert(rows == value, rows.to_s + " does not equal " + value.to_s)` 
-to fail the test in case the values don't match.
-*Update: You no longer need to implement the scenario for no ratings selected.*
+   **HINT**: Consider counting the number of rows in the table to implement these steps. If you have computed rows as the number of table rows, you can use the assertion 
+   `assert(rows == value, rows.to_s + " does not equal " + value.to_s)` 
+   to fail the test in case the values don't match.
+   *Update: You no longer need to implement the scenario for no ratings selected.*
 
 0. Use your new step definitions to complete the scenario `all ratings selected`. SUCCESS is when all scenarios in `filter_movie_list.feature` pass with all steps green.
 
 
-#. Part 3: Happy paths for sorting movies by title and by release date
+# Part 3: Happy paths for sorting movies by title and by release date
 
 0. Since the scenarios in `sort_movie_list.feature` involve sorting, you will need the ability to have steps that test whether one movie appears before another in the output listing. Create a step definition that matches a step such as 
 `Then I should see "Aladdin" before "Amelie"`
