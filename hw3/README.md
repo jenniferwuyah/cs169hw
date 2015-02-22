@@ -34,7 +34,7 @@ Here is a brief breakdown of the files we are providing to you:
 *HISTORICAL NOTE:  the file web_steps.rb used to be included in distributions of Cucumber.  The maintainers decided that using such low-level steps encourages developers to write complicated scenarios, so they removed it from Cucumber by default.  We are providing it to you because we feel it is a good set of reference steps to browse through to get a feel for how Cucumber and Capybara work.  In general, for example when you start your own projects, you should NOT use the steps provided in web_steps.rb.  For more information, read the comments in web_steps.rb.  For this homework, feel free to use it (or avoid it if you're feeling adventurous).*
 
 
-#. Part 1: Create a declarative scenario step for adding movies
+# Part 1: Create a declarative scenario step for adding movies
 
 ### THE GOAL OF BDD IS TO EXPRESS BEHAVIORAL TASKS RATHER THAN LOW-LEVEL OPERATIONS.
 
