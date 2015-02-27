@@ -30,7 +30,7 @@ You can make sure that RSpec is installed correctly by running "bundle exec rspe
 
 # Part 1: Add a Director field to Movies
 
-Create and apply a migration that adds the Director field to the movies table. The director field should be a string containing the name of the movie’s director. HINT: use the `add_column` method of `ActiveRecord::Migration` to do this, or use a smart migration name to have Rails interpret your migration and build it for you: [http://guides.rubyonrails.org/v3.2.13/migrations.html]
+Create and apply a migration that adds the Director field to the movies table. The director field should be a string containing the name of the movie’s director. HINT: use the `add_column` method of `ActiveRecord::Migration` to do this, or use a smart migration name to have Rails interpret your migration and build it for you: [http://guides.rubyonrails.org/v3.2.13/migrations.html](http://guides.rubyonrails.org/v3.2.13/migrations.html)
 
 In order for mass assignment to continue working, add `:director` to the `attr_accessibl`e arguments in the `movie.rb` model.
 
