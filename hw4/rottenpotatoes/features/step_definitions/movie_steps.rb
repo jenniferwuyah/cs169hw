@@ -40,3 +40,7 @@ Then /I should see all the movies/ do
   # Make sure that all the movies in the app are visible in the table
   assert page.all('tbody tr').count == Movie.count
 end
+
+Then /the director of "(.*)" should be "(.*)"/ do |title, director|
+  Movie.find_by_title(title).director.should == director
+end

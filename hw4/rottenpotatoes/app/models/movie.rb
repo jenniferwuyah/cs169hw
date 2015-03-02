@@ -5,4 +5,8 @@ class Movie < ActiveRecord::Base
     ['G','PG','PG-13','R','NC-17']
   end
 
+  def self.find_by_director(movie)
+    Movie.where(:director => movie.director)
+  end
+
 end
